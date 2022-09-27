@@ -1,0 +1,225 @@
+\documentclass[8pt]{extarticle}
+
+\usepackage{array}
+\usepackage{titling}  % needs to be loaded before authblk
+\usepackage{authblk}
+\usepackage{booktabs}       % professional-quality tables
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage[english]{babel}
+\usepackage[natbib,style=numeric,natbib=true,maxbibnames=1,maxcitenames=1,giveninits=true,sorting=none]{biblatex}
+\usepackage{csquotes}
+\usepackage[inline]{enumitem}
+\usepackage{float}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}       % hyperlinks
+\usepackage{lipsum}
+\usepackage{multirow}
+% Set paragraph skip and indent
+\usepackage[skip=0pt,indent=4pt]{parskip}
+\usepackage{url}            % simple URL typesetting
+\usepackage{siunitx}
+\usepackage{textcomp}       % for \textdegree macro
+\usepackage{tikz}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{soul}
+\usepackage{xspace, setspace} % defines a command \xspace that guesses whether there should have been a space after it, and if so introduces that space; useful to replace any space "eaten" by the TeX command decoder.
+
+% Allow line breaks in column names
+\newcommand{\head}[2]{\multicolumn{1}{>{\centering\arraybackslash}p{#1}}{\textbf{#2}}}
+% e.g. \textbf{col_name} & \head{0.1\linewidth}{\textbf{Mean curvature}} & \textbf{col_name} 
+
+% Modify the paragraph command to reduce the spacing
+\makeatletter
+\renewcommand\paragraph{
+  \@startsection{paragraph}{4}{\z@}%
+  %{3.25ex \@plus1ex \@minus.2ex}%
+  {3pt plus 1pt minus 1pt}%
+  {-1em}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
+% Change the author and affiliation font size and the baselineskip
+\renewcommand{\Authfont}{\bfseries\fontsize{10pt}{10pt}\selectfont}
+\renewcommand{\Affilfont}{\normalfont\fontsize{8pt}{10pt}\selectfont}
+% Change the affiliation separation (the separation between the author and affiliation lines)
+\setlength{\affilsep}{0pt}
+
+% Customize the title command: remove all vertical skip spaces
+\makeatletter
+\def\@maketitle{%
+  \newpage
+%  \null% DELETED
+%  \vskip 2em% DELETED
+  \begin{center}%
+  \let \footnote \thanks
+    {\LARGE \@title \par}%
+%    \vskip 1.5em%  DELETED
+    {\large
+%      \lineskip .5em%  DELETED
+      \begin{tabular}[t]{c}%
+        \@author
+      \end{tabular}\par}%
+%    \vskip 1em%  DELETED
+    {\large \@date}%
+  \end{center}%
+  \par
+%  \vskip 1.5em}
+  \vskip 0.005em}
+\makeatother
+
+% Remove top/bottom space around figures
+\setlength\intextsep{0pt}
+\setlength\floatsep{-20pt}
+
+% Modify the space above caption
+\setlength{\abovecaptionskip}{4pt plus 3pt minus 2pt}
+
+% Rename the reference paragraph name
+\addbibresource{./bibliography/bibliography.bib}
+% Remove the name initials in bibliography
+\DeclareNameAlias{default}{labelname}\DeclareNameAlias{sortname}{default}
+% Remove indents and line breaks in bibliogrpahy items
+\defbibenvironment{bibliography}
+  {\noindent}
+  {\unspace}
+  {\printtext[labelnumberwidth]{%
+     \printfield{labelprefix}%
+     \printfield{labelnumber}}%
+   \addspace}
+\renewbibmacro*{finentry}{\finentry\addspace}
+
+% Abstract preparation guidelines
+% https://www.ismrm.org/workshops/2022/Diffusion/call.htm
+%
+% Abstracts are limited to one page in length (21.59 cm x 27.94 cm / 8.5"x11"), including all images, tables, graphs and references. Font size should be no smaller than 8 pt.
+% 
+% SUGGESTED FORMAT: The abstract should be formatted in one column, containing all of the following sections that answer the questions below:
+% 
+% Abstract title
+% Author list
+% Target audience: "Who will benefit from this information?"
+% Purpose: "Why was this study/research performed?"
+% Methods: "How has this problem been studied?"
+% Results: "Principal data and statistical analysis"
+% Discussion: "What is the interpretation of the data?"
+% Conclusion: "What is the relevance to clinical practice or future research?"
+% References: (optional)
+
+\title{\textbf{\huge One page abstract model title}}
+
+\newcommand\repeatthanks[1][\value{footnote}]{\footnotemark[#1]}
+\author[1,2]{Jon Haitz Legarreta}
+\author[3]{Laurent Petit}
+\author[2]{Pierre-Marc Jodoin\thanks{Co-senior author. These authors contributed equally.}}
+\author[1]{Maxime Descoteaux\repeatthanks}
+
+\affil[1]{Sherbrooke Connectivity Imaging Laboratory (SCIL), Universit\'{e} de Sherbrooke, Sherbrooke, Canada}
+\affil[2]{Videos \& Images Theory and Analytics Laboratory (VITAL), Universit\'{e} de Sherbrooke, Sherbrooke, Canada}
+\affil[3]{Universit\'{e} Bordeaux, CNRS, CEA, IMN, GIN, UMR 5293, F-33000 Bordeaux, France}
+
+% Do not print the date
+\date{\vspace{-0.25in}}
+% Remove spacing around date
+\predate{}
+\postdate{}
+
+\setlength{\droptitle}{-0.5in}
+
+\geometry{letterpaper, margin=0.25in}
+
+% Turn off page numbering
+\pagenumbering{gobble}
+
+\begin{document}
+
+\maketitle
+
+%% Purpose
+\paragraph{PURPOSE}
+\label{par:purpose}
+
+\begin{wrapfigure}{r}{0.15\linewidth}
+\centering
+\includegraphics[scale=0.95, width=0.95\linewidth]{example-image}
+\caption{\label{fig:fig1label}Caption1.}
+\end{wrapfigure}
+
+\lipsum[1]
+
+This is motivated by the work in \citep{Maier-Hein:NatureComm:2017}.
+
+Figure \ref{fig:fig1label} shows the principle.
+
+%% Methods
+\paragraph{METHODS}
+\label{par:methods}
+
+\begin{wrapfigure}{r}{0.35\linewidth}
+\centering
+\includegraphics[scale=0.95, width=0.95\linewidth]{example-image-a}
+\caption{\label{fig:fig2label}Caption2.}
+\end{wrapfigure}
+
+\lipsum[2-3]
+
+Some early works in local modelling by \citet{Descoteaux:MRM:2007} gave rise many years later to other tractography works, such as \citep{Legarreta:MIA:2021}.
+
+Figure \ref{fig:fig2label} is yet another insightful figure.
+
+%% Results
+\paragraph{RESULTS}
+\label{par:results}
+
+\lipsum[4]
+
+Figure \ref{fig:fig3label} shows the local orientation field and the resulting tractogram. Table \ref{tab:table1label} shows quantitative results.
+
+\begin{wrapfigure}{l}{0.45\linewidth}
+\centering
+\begin{tabular}{cc}
+\includegraphics[scale=0.95, width=0.45\linewidth]{example-image-b} &
+\includegraphics[scale=0.95, width=0.45\linewidth]{example-image-c} \\
+\end{tabular}
+\caption{\label{fig:fig3label}Caption3.}
+\end{wrapfigure}
+
+\lipsum[5-6]
+
+\begin{wraptable}{r}{0.355\linewidth}
+\centering
+\caption{\label{tab:table1label}Caption4.}
+\centering
+\begin{tabular}{c|c|c|c}
+\toprule
+\textbf{Column1} & \textbf{Column2} & \textbf{Column3} & \textbf{Column4} \\
+\midrule
+Method1 & ParamVal1 & \num{94.3} (\num{4.5}) & \num{14.7} (\num{6.9}) \\
+Method2 & ParamVal2 & \num{96.5} (\num{2.1}) & \num{11.5} (\num{4.2}) \\
+\midrule
+Method3 & ParamVal1 & \num{98.7} (\num{1.9}) & \num{8.7} (\num{1.4}) \\
+Method4 & ParamVal2 & \num{99.8} (\num{1.1}) & \num{1.4} (\num{0.3}) \\
+\bottomrule
+\end{tabular}
+\end{wraptable}
+
+\lipsum[7]
+
+%% Discussion
+\paragraph{DISCUSSION}
+\label{par:discussion}
+
+\lipsum[8-9]
+
+%% Conclusion
+\paragraph{CONCLUSION}
+\label{par:conclusion}
+
+\lipsum[10]
+
+%% Bibliography
+\paragraph{REFERENCES} \printbibliography[heading=none]
+
+\end{document}
